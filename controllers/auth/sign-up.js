@@ -59,6 +59,8 @@ module.exports = async (req, res) => {
         })
     }
     catch(error) {
+        console.log(error);
+
         return response(res, 500, {
             success: false,
             message: "Lỗi server!"
