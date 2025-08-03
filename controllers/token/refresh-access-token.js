@@ -44,7 +44,6 @@ module.exports = async (req, res) => {
 
         res.cookie('access-token', accessToken, {
             httpOnly: true,
-            sameSite: 'none',
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
@@ -52,7 +51,6 @@ module.exports = async (req, res) => {
 
         res.cookie('refresh-token', refreshToken, {
             httpOnly: true,
-            sameSite: 'none',
             secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
