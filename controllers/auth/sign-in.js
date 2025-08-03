@@ -57,6 +57,9 @@ module.exports = async (req, res) => {
         const accessToken = generateToken(data, "1h");
         const refreshToken = generateToken({ id: data.id }, "7d");
 
+        res.setHeader('Access-Control-Allow-Origin', 'https://realchat-three.vercel.app');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+
         res.cookie('access-token', accessToken, {
             httpOnly: true,
             secure: true,
