@@ -61,14 +61,28 @@ module.exports = async (req, res) => {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
-            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
+            ...(
+                process.env.NODE_ENV === "production" ?
+                {
+                    sameSite: "None",
+                    secure: true
+                } :
+                {}
+            )
         });
 
         res.cookie('refresh-token', refreshToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
-            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
+            ...(
+                process.env.NODE_ENV === "production" ?
+                {
+                    sameSite: "None",
+                    secure: true
+                } :
+                {}
+            )
         });
 
         return response(res, 200, {
