@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
         res.cookie('access-token', accessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'None',
+            sameSite: 'none',
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
         });
@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
         res.cookie('refresh-token', refreshToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'None',
+            sameSite: 'none',
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
         });
