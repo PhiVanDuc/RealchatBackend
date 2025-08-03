@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('./libs/cors');
+const configCors = require("./libs/config-cors");
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // cors
-app.use(cors);
+app.use(configCors);
 
 app.use(logger('dev'));
 app.use(express.json());

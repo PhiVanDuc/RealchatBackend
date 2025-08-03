@@ -57,32 +57,24 @@ module.exports = async (req, res) => {
         const accessToken = generateToken(data, "1h");
         const refreshToken = generateToken({ id: data.id }, "7d");
 
-        res.cookie('access-token', accessToken, {
+        const isProd = process.env.NODE_ENV === "production";
+
+        res.cookie("access-token", accessToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
-            ...(
-                process.env.NODE_ENV === "production" ?
-                {
-                    sameSite: "None",
-                    secure: true
-                } :
-                {}
-            )
+            sameSite: "None",
+            secure: true,
+            partitioned: true
         });
 
-        res.cookie('refresh-token', refreshToken, {
+        res.cookie("refresh-token", refreshToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
-            ...(
-                process.env.NODE_ENV === "production" ?
-                {
-                    sameSite: "None",
-                    secure: true
-                } :
-                {}
-            )
+            sameSite: "None",
+            secure: true,
+            partitioned: true
         });
 
         return response(res, 200, {
