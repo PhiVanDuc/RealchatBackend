@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
             const senderSocketIds = userOnlines.get(sender.id) || [];
             const partnerSocketIds = userOnlines.get(partner.id) || [];
 
-            io.to(partnerSocketIds).emit("message:delete", { message });
+            if (partnerSocketIds.length > 0) io.to(partnerSocketIds).emit("message:delete", { message });
             io.to([...senderSocketIds, ...partnerSocketIds]).emit("room:delete-message", { room: { ...rawRoom, message } });
         }
 

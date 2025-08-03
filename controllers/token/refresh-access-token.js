@@ -44,16 +44,16 @@ module.exports = async (req, res) => {
 
         res.cookie('access-token', accessToken, {
             httpOnly: true,
-            secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
+            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
         });
 
         res.cookie('refresh-token', refreshToken, {
             httpOnly: true,
-            secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             path: '/',
+            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
         });
 
         return response(res, 200, {

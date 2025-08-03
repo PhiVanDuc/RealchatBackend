@@ -78,8 +78,8 @@ module.exports = async (req, res) => {
             const senderSocketIds = userOnlines.get(sender.id) || [];
             const partnerSocketIds = userOnlines.get(partner.id) || [];
 
-            io.to(senderSocketIds).emit("message:read", { message });
-            io.to(partnerSocketIds).emit("room:read-message", { room: { ...rawRoom, message } });
+            if (senderSocketIds.length > 0) io.to(senderSocketIds).emit("message:read", { message });
+            if (partnerSocketIds.length > 0) io.to(partnerSocketIds).emit("room:read-message", { room: { ...rawRoom, message } });
         }
 
         return response(res, 200, {
