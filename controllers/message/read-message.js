@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
             const senderSocketIds = userOnlines.get(sender.id) || [];
             const partnerSocketIds = userOnlines.get(partner.id) || [];
 
-            if (senderSocketIds.length > 0) io.to(senderSocketIds).emit("message:read", { message });
+            if (senderSocketIds.length > 0 || partnerSocketIds.length > 0) io.to([...senderSocketIds, ...partnerSocketIds]).emit("message:read", { message });
             if (partnerSocketIds.length > 0) io.to(partnerSocketIds).emit("room:read-message", { room: { ...rawRoom, message } });
         }
 

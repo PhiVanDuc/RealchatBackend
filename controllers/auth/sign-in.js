@@ -54,30 +54,10 @@ module.exports = async (req, res) => {
             avatar: account.avatar
         }
 
-        const accessToken = generateToken(data, "1h");
+        const accessToken = generateToken(data);
         const refreshToken = generateToken({ id: data.id }, "7d");
 
-        const isProd = process.env.NODE_ENV === "production";
-
-        res.cookie("access-token", accessToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/',
-            sameSite: "None",
-            secure: true,
-            partitioned: true
-        });
-
-        res.cookie("refresh-token", refreshToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/',
-            sameSite: "None",
-            secure: true,
-            partitioned: true
-        });
-
-        return response(res, 200, {
+        return res.status(200).json({
             success: true,
             message: "Đã đăng nhập thành công!",
             data: {

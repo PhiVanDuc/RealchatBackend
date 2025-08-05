@@ -38,23 +38,9 @@ module.exports = async (req, res) => {
             id: account.id,
             display_name: account.display_name,
             avatar: account.avatar
-        }, "1h");
+        });
         
         const refreshToken = generateToken({ id: account.id }, "7d");
-
-        res.cookie('access-token', accessToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/',
-            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
-        });
-
-        res.cookie('refresh-token', refreshToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/',
-            ...(process.env.NODE_ENV === "production" ? { secure: true, sameSite: "none" } : {})
-        });
 
         return response(res, 200, {
             success: true,

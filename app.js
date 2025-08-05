@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const configCors = require("./libs/config-cors");
+const cors = require("cors");
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
@@ -16,7 +16,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // cors
-app.use(configCors);
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://realchat-chi.vercel.app'],
+  methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  optionsSuccessStatus: 200
+}));
 
 app.use(logger('dev'));
 app.use(express.json());

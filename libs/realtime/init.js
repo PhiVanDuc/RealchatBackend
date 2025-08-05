@@ -10,8 +10,7 @@ const initSocket = (server) => {
         cors: {
             origin: ['http://localhost:3000', 'https://realchat-chi.vercel.app'],
             methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-            optionsSuccessStatus: 200,
-            credentials: true
+            optionsSuccessStatus: 200
         }
     });
 
