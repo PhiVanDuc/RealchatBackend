@@ -3,7 +3,7 @@ const userOnlines = new Map();
 
 const emitOnlineUsers = _.debounce((io) => {
     io.emit("online-users", Array.from(userOnlines.keys()));
-}, 2000);
+}, 1000);
 
 module.exports = {
     online: (io, socket) => {

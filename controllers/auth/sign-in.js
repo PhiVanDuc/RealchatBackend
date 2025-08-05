@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
             avatar: account.avatar
         }
 
-        const accessToken = generateToken(data);
+        const accessToken = generateToken(data, "1h");
         const refreshToken = generateToken({ id: data.id }, "7d");
 
         return res.status(200).json({

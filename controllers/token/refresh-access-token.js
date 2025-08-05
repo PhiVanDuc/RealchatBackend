@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
             id: account.id,
             display_name: account.display_name,
             avatar: account.avatar
-        });
+        }, "1h");
         
         const refreshToken = generateToken({ id: account.id }, "7d");
 
